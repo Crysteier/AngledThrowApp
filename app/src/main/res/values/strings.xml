@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Angled Throw App</string>
+    <string name="btn_calc_local">Calculate locally</string>
+    <string name="btn_calc_server">Calculate by server</string>
+</resources>
