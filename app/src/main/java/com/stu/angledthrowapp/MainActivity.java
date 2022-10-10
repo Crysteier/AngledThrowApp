@@ -85,6 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void OnAnimationClick(View v){
+        Intent i = new Intent(this, AnimationActivity.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();

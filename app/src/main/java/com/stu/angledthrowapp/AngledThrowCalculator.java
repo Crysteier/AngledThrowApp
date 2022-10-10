@@ -23,7 +23,7 @@ public class AngledThrowCalculator {
         }
     }
 
-    private static void ClearLists(){
+    private static void ClearLists() {
         xCoords.clear();
         yCoords.clear();
         timePoints.clear();
@@ -40,18 +40,19 @@ public class AngledThrowCalculator {
             x = velocity * time * Math.cos(Math.toRadians(angle));
             y = velocity * time * Math.sin(Math.toRadians(angle)) - (g * Math.pow(time, 2)) / 2;
 
-            xCoords.add(round(x,4));
-            yCoords.add(round(y,4));
-            timePoints.add(round(time,4));
+            xCoords.add(round(x, 4));
+            yCoords.add(round(y, 4));
+            timePoints.add(round(time, 4));
         }
 
         //add last point and time
         x = velocity * timeStop * Math.cos(Math.toRadians(angle));
-        xCoords.add(round(x,4));
+        xCoords.add(round(x, 4));
         yCoords.add(0.0);
-        timePoints.add(round(timeStop,4));
+        timePoints.add(round(timeStop, 4));
         IsCalculated = true;
     }
+
 
     private static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
