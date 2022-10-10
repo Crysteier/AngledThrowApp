@@ -10,6 +10,7 @@ public class AngledThrowCalculator {
     public static ArrayList<Double> yCoords;
     public static ArrayList<Double> timePoints;
     public static Double g = 9.81, timeStep = 0.1, velocity, angle;
+    public static boolean IsCalculated = false;
 
     private static void Init() {
         if (xCoords == null || yCoords == null || timePoints == null) {
@@ -22,10 +23,18 @@ public class AngledThrowCalculator {
         }
     }
 
+    private static void ClearLists(){
+        xCoords.clear();
+        yCoords.clear();
+        timePoints.clear();
+    }
+
     public static void CalculateLocally() {
+
         double x = 0, y = 0, time = 0;
         double timeStop = (2 * velocity * Math.sin(Math.toRadians(angle))) / g;
         Init();
+        ClearLists();
 
         for (; time < timeStop; time += timeStep) {
             x = velocity * time * Math.cos(Math.toRadians(angle));
@@ -41,6 +50,7 @@ public class AngledThrowCalculator {
         xCoords.add(round(x,4));
         yCoords.add(0.0);
         timePoints.add(round(timeStop,4));
+        IsCalculated = true;
     }
 
     private static double round(double value, int places) {

@@ -2,4 +2,6 @@
     <string name="app_name">Angled Throw App</string>
     <string name="btn_calc_local">Calculate locally</string>
     <string name="btn_calc_server">Calculate by server</string>
+    <string name="angle_text">Angle:</string>
+    <string name="velocity_text">Velocity:</string>
 </resources>
