@@ -98,6 +98,7 @@ public class GraphActivity extends AppCompatActivity {
         chart.getAxisRight().setEnabled(false);
 
         XAxis xAxis = chart.getXAxis();
+
         xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
         xAxis.setTextSize(10f);
         xAxis.setTextColor(Color.RED);

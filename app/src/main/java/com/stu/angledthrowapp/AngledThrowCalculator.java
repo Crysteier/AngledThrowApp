@@ -11,6 +11,7 @@ public class AngledThrowCalculator {
     public static ArrayList<Double> timePoints;
     public static Double g = 9.81, timeStep = 0.1, velocity, angle;
     public static boolean IsCalculated = false;
+    public static ResponseAngledThrow responseAngledThrow = new ResponseAngledThrow();
 
     private static void Init() {
         if (xCoords == null || yCoords == null || timePoints == null) {

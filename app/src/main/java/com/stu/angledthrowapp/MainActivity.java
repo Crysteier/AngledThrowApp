@@ -23,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BtnShowAnimation = (Button) findViewById(R.id.btnShowAnimation);
         BtnShowGraph = (Button) findViewById(R.id.btnShowGraph);
         BtnCalculateLocally = (Button) findViewById(R.id.btnCalculateLocally);
         InputAngle = (EditText) findViewById(R.id.inputAngle);
         InputVelocity = (EditText) findViewById(R.id.inputVelocity);
 
         BtnShowGraph.setEnabled(AngledThrowCalculator.IsCalculated);
+        BtnShowAnimation.setEnabled(AngledThrowCalculator.IsCalculated);
     }
 
     public void OnLocallyClick(View v) {
@@ -90,15 +92,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void OnTest(View v){
+        Intent i = new Intent(this, TestAPI.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
         BtnShowGraph.setEnabled(AngledThrowCalculator.IsCalculated);
+        BtnShowAnimation.setEnabled(AngledThrowCalculator.IsCalculated);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         BtnShowGraph.setEnabled(AngledThrowCalculator.IsCalculated);
+        BtnShowAnimation.setEnabled(AngledThrowCalculator.IsCalculated);
     }
 }
