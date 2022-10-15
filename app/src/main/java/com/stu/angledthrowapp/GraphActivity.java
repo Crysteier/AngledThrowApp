@@ -5,27 +5,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.model.GradientColor;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +35,6 @@ public class GraphActivity extends AppCompatActivity {
         CreateChart(chart);
     }
 
-    // this event will enable the back
-    // function to the button on press
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -60,10 +47,22 @@ public class GraphActivity extends AppCompatActivity {
 
     private void CreateChart(LineChart chart) {
         List<Entry> entries = new ArrayList<Entry>();
-        for (int i = 0; i < AngledThrowCalculator.timePoints.size(); i++) {
-            float x = AngledThrowCalculator.timePoints.get(i).floatValue();
-            float y = AngledThrowCalculator.yCoords.get(i).floatValue();
-            entries.add(new Entry(x,y));
+        if (AngledThrowCalculator.lastChange == 1) {
+            for (int i = 0; i < AngledThrowCalculator.timePoints.size(); i++) {
+                float x = AngledThrowCalculator.timePoints.get(i).floatValue();
+                float y = AngledThrowCalculator.yCoords.get(i).floatValue();
+                entries.add(new Entry(x, y));
+            }
+        } else if (AngledThrowCalculator.lastChange == 2) {
+            List<Coord> coords = AngledThrowCalculator.responseAngledThrow.getCoords();
+            for (int i = 0; i <= AngledThrowCalculator.responseAngledThrow.getStepCount()-1; i++) {
+                float x = coords.get(i).getX().floatValue();
+                float y = coords.get(i).getY().floatValue();
+                entries.add(new Entry(x, y));
+            }
+
+        } else {
+            throw new IllegalArgumentException();
         }
 
         int startColor1 = ContextCompat.getColor(this, android.R.color.holo_orange_light);
@@ -104,12 +103,18 @@ public class GraphActivity extends AppCompatActivity {
         xAxis.setTextColor(Color.RED);
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);
-        xAxis.setLabelCount(AngledThrowCalculator.xCoords.size()-1,true);
         xAxis.setGranularityEnabled(true);
         xAxis.setGranularity(0.1f);
         xAxis.mAxisMinimum = 0;
-        xAxis.mAxisMaximum = AngledThrowCalculator.timePoints.get(AngledThrowCalculator.xCoords.size()-1).floatValue();
-
+        if (AngledThrowCalculator.lastChange == 1) {
+            xAxis.setLabelCount(AngledThrowCalculator.xCoords.size() - 1, true);
+            xAxis.mAxisMaximum = AngledThrowCalculator.timePoints.get(AngledThrowCalculator.xCoords.size() - 1).floatValue();
+        } else if (AngledThrowCalculator.lastChange == 2) {
+            int size = AngledThrowCalculator.responseAngledThrow.getCoords().size();
+            xAxis.setLabelCount(size+1, true);
+            float asd = size*0.1f;
+            xAxis.mAxisMaximum = asd;
+        }
 
         chart.invalidate(); // refresh
     }

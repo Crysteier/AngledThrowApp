@@ -12,6 +12,7 @@ public class AngledThrowCalculator {
     public static Double g = 9.81, timeStep = 0.1, velocity, angle;
     public static boolean IsCalculated = false;
     public static ResponseAngledThrow responseAngledThrow = new ResponseAngledThrow();
+    public static int lastChange = 0;
 
     private static void Init() {
         if (xCoords == null || yCoords == null || timePoints == null) {
@@ -22,12 +23,14 @@ public class AngledThrowCalculator {
         if (velocity == null || angle == null) {
             throw new IllegalArgumentException("Cannot calculate with null inputs");
         }
+
     }
 
     private static void ClearLists() {
         xCoords.clear();
         yCoords.clear();
         timePoints.clear();
+        lastChange = 1;
     }
 
     public static void CalculateLocally() {
@@ -39,7 +42,7 @@ public class AngledThrowCalculator {
 
         for (; time < timeStop; time += timeStep) {
             x = velocity * time * Math.cos(Math.toRadians(angle));
-            y = velocity * time * Math.sin(Math.toRadians(angle)) - (g * Math.pow(time, 2)) / 2;
+            y = velocity * time * Math.sin(Math.toRadians(angle)) - ((g * Math.pow(time, 2)) / 2);
 
             xCoords.add(round(x, 4));
             yCoords.add(round(y, 4));

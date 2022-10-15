@@ -7,14 +7,14 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/inputVelocity"
+        android:id="@+id/inputAngle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="exmp. 15 in degrees"
         android:inputType="number"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/inputAngle"
+        app:layout_constraintBottom_toTopOf="@+id/inputVelocity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/AngleText"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/inputAngle"
+        android:id="@+id/inputVelocity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/VelocityText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputVelocity"
+        app:layout_constraintTop_toBottomOf="@+id/inputAngle"
         app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputAngle"
+        app:layout_constraintTop_toBottomOf="@+id/inputVelocity"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
@@ -98,8 +98,8 @@
 
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/inputVelocity"
-        app:layout_constraintEnd_toStartOf="@+id/inputVelocity"
+        app:layout_constraintBottom_toBottomOf="@+id/inputAngle"
+        app:layout_constraintEnd_toStartOf="@+id/inputAngle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -112,8 +112,8 @@
 
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/inputAngle"
-        app:layout_constraintEnd_toStartOf="@+id/inputAngle"
+        app:layout_constraintBottom_toBottomOf="@+id/inputVelocity"
+        app:layout_constraintEnd_toStartOf="@+id/inputVelocity"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -130,14 +130,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnShowGraph"
         app:layout_constraintVertical_bias="0.5" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="OnTest"
-        android:text="TEST"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="664dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

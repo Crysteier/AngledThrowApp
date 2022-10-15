@@ -46,13 +46,24 @@ public class AnimateView extends AppCompatImageView {
     };
 
     protected void onDraw(Canvas c) {
-        if (i < AngledThrowCalculator.xCoords.size()-1) {
-            x = (int) AngledThrowCalculator.xCoords.get(i).intValue();
-            y = level-AngledThrowCalculator.yCoords.get(i).intValue();
-            i++;
+        if (AngledThrowCalculator.lastChange == 1) {
+            if (i < AngledThrowCalculator.xCoords.size() - 1) {
+                x = (int) AngledThrowCalculator.xCoords.get(i).intValue();
+                y = level - AngledThrowCalculator.yCoords.get(i).intValue();
+                i++;
+            }
+            c.drawBitmap(ball.getBitmap(), x, y, null);
+            c.drawLine(0, level + 140, getWidth(), level + 140, paint);
+            h.postDelayed(r, FRAME_RATE);
+        } else {
+            if (i < AngledThrowCalculator.responseAngledThrow.getCoords().size() - 1) {
+                x = (int) AngledThrowCalculator.responseAngledThrow.getCoords().get(i).getX().intValue();
+                y = level - AngledThrowCalculator.responseAngledThrow.getCoords().get(i).getY().intValue();
+                i++;
+            }
+            c.drawBitmap(ball.getBitmap(), x, y, null);
+            c.drawLine(0, level + 140, getWidth(), level + 140, paint);
+            h.postDelayed(r, FRAME_RATE);
         }
-        c.drawBitmap(ball.getBitmap(), x, y, null);
-        c.drawLine(0, level + 140, getWidth(), level + 140, paint);
-        h.postDelayed(r, FRAME_RATE);
     }
 }
