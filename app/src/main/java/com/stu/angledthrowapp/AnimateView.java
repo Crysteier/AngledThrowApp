@@ -53,7 +53,17 @@ public class AnimateView extends AppCompatImageView {
                 i++;
             }
             c.drawBitmap(ball.getBitmap(), x, y, null);
-            c.drawLine(0, level + 140, getWidth(), level + 140, paint);
+            c.drawLine(0, level + 85, getWidth(), level + 85, paint);
+            if(AngledThrowCalculator.xCoords.get(AngledThrowCalculator.xCoords.size()-1)<80){
+                paint.setTextSize(24f);
+            }else{
+                paint.setTextSize(48f);
+                c.drawText("0",40,level+130,paint);
+            }
+            c.drawText(AngledThrowCalculator.xCoords.get(AngledThrowCalculator.xCoords.size()-1).toString(),
+                    AngledThrowCalculator.xCoords.get(AngledThrowCalculator.xCoords.size()-1).floatValue(),
+                    level+130,paint);
+
             h.postDelayed(r, FRAME_RATE);
         } else {
             if (i < AngledThrowCalculator.responseAngledThrow.getCoords().size() - 1) {
@@ -63,6 +73,7 @@ public class AnimateView extends AppCompatImageView {
             }
             c.drawBitmap(ball.getBitmap(), x, y, null);
             c.drawLine(0, level + 140, getWidth(), level + 140, paint);
+
             h.postDelayed(r, FRAME_RATE);
         }
     }

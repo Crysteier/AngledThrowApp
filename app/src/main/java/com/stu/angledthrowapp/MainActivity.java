@@ -81,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
         if(!CheckInput(velocity,angle)){
             return;
         }
+        Animation anim =  AnimationUtils.loadAnimation(MainActivity.this,R.anim.bounce);
+        BtnCalculateByServer.startAnimation(anim);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {   }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {   }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {    }
+        });
         String url = "http://10.0.2.2:5135/api/AngledThrow?angle="+angle+"&velocity="+velocity;
         System.out.println(url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -93,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
                         AngledThrowCalculator.responseAngledThrow = gs.fromJson(response,ResponseAngledThrow.class);
                         AngledThrowCalculator.lastChange = 2;
                         AngledThrowCalculator.IsCalculated = true;
-
+                        Intent i = new Intent(MainActivity.this, TableViewActivity.class);
+                        startActivity(i);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -106,21 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         queue.add(stringRequest);
-        Intent i = new Intent(this, TableViewActivity.class);
-        Animation anim =  AnimationUtils.loadAnimation(this,R.anim.bounce);
-        BtnCalculateByServer.startAnimation(anim);
-        anim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {   }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                startActivity(i);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {    }
-        });
     }
 
     private boolean CheckInput(String velocity, String angle){
@@ -128,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Angle & Velocity is required", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         if(Double.parseDouble(angle) > 90){
             Toast.makeText(MainActivity.this, "Angle must be less than 90 degrees!", Toast.LENGTH_SHORT).show();
             return false;
@@ -146,9 +144,7 @@ public class MainActivity extends AppCompatActivity {
         BtnShowGraph.startAnimation(anim);
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
+            public void onAnimationStart(Animation animation) {   }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -156,20 +152,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
+            public void onAnimationRepeat(Animation animation) {  }
         });
 
     }
 
     public void OnAnimationClick(View v){
         Intent i = new Intent(this, AnimationActivity.class);
-        startActivity(i);
-    }
-
-    public void OnTest(View v){
-        Intent i = new Intent(this, TestAPI.class);
         startActivity(i);
     }
 

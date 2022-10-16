@@ -55,7 +55,7 @@ public class GraphActivity extends AppCompatActivity {
             }
         } else if (AngledThrowCalculator.lastChange == 2) {
             List<Coord> coords = AngledThrowCalculator.responseAngledThrow.getCoords();
-            for (int i = 0; i <= AngledThrowCalculator.responseAngledThrow.getStepCount()-1; i++) {
+            for (int i = 0; i <= AngledThrowCalculator.responseAngledThrow.getStepCount() - 1; i++) {
                 float x = coords.get(i).getX().floatValue();
                 float y = coords.get(i).getY().floatValue();
                 entries.add(new Entry(x, y));
@@ -107,15 +107,21 @@ public class GraphActivity extends AppCompatActivity {
         xAxis.setGranularity(0.1f);
         xAxis.mAxisMinimum = 0;
         if (AngledThrowCalculator.lastChange == 1) {
-            xAxis.setLabelCount(AngledThrowCalculator.xCoords.size() - 1, true);
+            if (AngledThrowCalculator.timePoints.size() > 10) {
+                xAxis.setLabelCount(10, true);
+            } else {
+                xAxis.setLabelCount(AngledThrowCalculator.yCoords.size(), true);
+            }
             xAxis.mAxisMaximum = AngledThrowCalculator.timePoints.get(AngledThrowCalculator.xCoords.size() - 1).floatValue();
         } else if (AngledThrowCalculator.lastChange == 2) {
             int size = AngledThrowCalculator.responseAngledThrow.getCoords().size();
-            xAxis.setLabelCount(size+1, true);
-            float asd = size*0.1f;
-            xAxis.mAxisMaximum = asd;
+            if (size > 10) {
+                xAxis.setLabelCount(10, true);
+            } else {
+                xAxis.setLabelCount(size, true);
+            }
+            xAxis.mAxisMaximum = size * 0.1f;
         }
-
         chart.invalidate(); // refresh
     }
 }
